@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="04" author="philipp">
+
+        <createTable tableName="category"
+                     remarks="A table to contain all category">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="news_category"
+                     remarks="A table to contain all news-category relations">
+            <column name="news_id" type="int">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="category_id" type="int">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="news_category" baseColumnNames="news_id"
+                                 constraintName="fk1_news_category"
+                                 referencedColumnNames="id" referencedTableName="news"/>
+
+        <addForeignKeyConstraint baseTableName="news_category" baseColumnNames="category_id"
+                                 constraintName="fk2_news_category"
+                                 referencedColumnNames="id" referencedTableName="category"/>
+
+        <insert tableName="category">
+            <column name="name">Java</column>
+        </insert>
+        <insert tableName="category">
+            <column name="name">Angular</column>
+        </insert>
+        <insert tableName="category">
+            <column name="name">Other</column>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="03" author="philipp">
+
+        <createTable tableName="role"
+                     remarks="A table to contain all roles">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(20)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="user_role"
+                     remarks="A table to contain all user-role relations">
+            <column name="user_id" type="int">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="role_id" type="int">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="user_role" baseColumnNames="user_id"
+                                 constraintName="fk1_user_role"
+                                 referencedColumnNames="id" referencedTableName="user"/>
+
+        <addForeignKeyConstraint baseTableName="user_role" baseColumnNames="role_id"
+                                 constraintName="fk2_user_role"
+                                 referencedColumnNames="id" referencedTableName="role"/>
+
+        <insert tableName="role">
+            <column name="name">ROLE_ADMIN</column>
+        </insert>
+        <insert tableName="role">
+            <column name="name">ROLE_USER</column>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

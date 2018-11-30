@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <include file="changeLog/01-create-user-news-comments-schema.xml" relativeToChangelogFile="true"/>
+    <include file="changeLog/02-FK-user-news-comments.xml" relativeToChangelogFile="true"/>
+    <include file="changeLog/03-role.xml" relativeToChangelogFile="true"/>
+    <include file="changeLog/04-category.xml" relativeToChangelogFile="true"/>
+    <include file="changeLog/05-tag.xml" relativeToChangelogFile="true"/>
+    <include file="changeLog/06-delete-section-id.xml" relativeToChangelogFile="true"/>
+
+    <include file="changeLog/07-delete-tag-id.xml" relativeToChangelogFile="true"/>
+
+    <include file="changeLog/08-add-comments-userId.xml" relativeToChangelogFile="true"/>
+    <include file="changeLog/09-add-comments-userId-constraint.xml" relativeToChangelogFile="true"/>
+
+
+</databaseChangeLog>

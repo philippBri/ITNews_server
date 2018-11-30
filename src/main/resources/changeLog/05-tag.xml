@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="05" author="philipp">
+
+        <createTable tableName="tag"
+                     remarks="A table to contain all tag">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="news_tag"
+                     remarks="A table to contain all news-tag relations">
+            <column name="news_id" type="int">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="tag_id" type="int">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="news_tag" baseColumnNames="news_id"
+                                 constraintName="fk1_news_tag"
+                                 referencedColumnNames="id" referencedTableName="news"/>
+
+        <addForeignKeyConstraint baseTableName="news_tag" baseColumnNames="tag_id"
+                                 constraintName="fk2_news_tag"
+                                 referencedColumnNames="id" referencedTableName="tag"/>
+
+        <insert tableName="tag">
+            <column name="name">Java</column>
+        </insert>
+        <insert tableName="tag">
+            <column name="name">Angular</column>
+        </insert>
+        <insert tableName="tag">
+            <column name="name">Other</column>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
